@@ -130,7 +130,7 @@ import numpy as np
 
 # # # #---->Flipping image
 
-img = cv.imread('Photos/Cat.jpg')
+# img = cv.imread('Photos/Cat.jpg')
 
 # flipped = cv.flip(img, 0)
 # cv.imshow("flipped", flipped)
