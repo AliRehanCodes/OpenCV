@@ -90,7 +90,10 @@ blank = np.zeros((400,400), dtype='uint8')
 
 blank2 = np.zeros(img.shape[:2], dtype="uint8")
 
-mask = cv.circle(blank2, (img.shape[1]//2, img.shape[0]//2), 100, 255, -1 )
+circle = cv.circle(blank2.copy(), (img.shape[1]//2, img.shape[0]//2), 100, 255, -1 )
+rectangel = cv.rectangle(blank2.copy(), (img.shape[1]//2+150, img.shape[0]//2-100), (img.shape[1]//2, img.shape[0]//2), 255, -1)
+
+mask = cv.bitwise_or(circle, rectangel)
 
 masked_image = cv.bitwise_and(img, img, mask=mask)
 cv.imshow("Mask", masked_image)
