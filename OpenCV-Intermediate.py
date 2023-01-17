@@ -1,11 +1,16 @@
 import cv2 as cv
 import numpy as np
+import matplotlib.pyplot as plt
 
 img = cv.imread('Photos//cats.jpg')
 cv.imshow("Cats", img)
 
-blank = np.zeros((400,400), dtype='uint8')
-# cv.imshow("Blank", blank)
+blank = np.zeros(img.shape[:2], dtype='uint8')
+cv.imshow("Blank", blank)
+
+gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+cv.imshow("Gray", gray)
+
 
 # # # --------> HOW TO FIND CONTOURS
 
@@ -88,20 +93,75 @@ blank = np.zeros((400,400), dtype='uint8')
 
 # # # # --------> What is Masking
 
-blank2 = np.zeros(img.shape[:2], dtype="uint8")
+# blank2 = np.zeros(img.shape[:2], dtype="uint8")
 
-circle = cv.circle(blank2.copy(), (img.shape[1]//2, img.shape[0]//2), 100, 255, -1 )
-rectangel = cv.rectangle(blank2.copy(), (img.shape[1]//2+150, img.shape[0]//2-100), (img.shape[1]//2, img.shape[0]//2), 255, -1)
+# circle = cv.circle(blank2.copy(), (img.shape[1]//2, img.shape[0]//2), 100, 255, -1 )
+# rectangel = cv.rectangle(blank2.copy(), (img.shape[1]//2+150, img.shape[0]//2-100), (img.shape[1]//2, img.shape[0]//2), 255, -1)
 
-mask = cv.bitwise_or(circle, rectangel)
+# mask = cv.bitwise_or(circle, rectangel)
 
-masked_image = cv.bitwise_and(img, img, mask=mask)
-cv.imshow("Mask", masked_image)
+# masked_image = cv.bitwise_and(img, img, mask=mask)
+# cv.imshow("Mask", masked_image)
 
+# # # # --------> Gray Histogram in OpenCV
 
+# gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+# circle = cv.circle(blank.copy(), (blank.shape[1]//2, blank.shape[0]//2), 100, 255, -1)
 
+# mask = cv.bitwise_and(gray, gray, mask=circle)
+# cv.imshow("Masked image", mask)
 
+# gray_hist = cv.calcHist([gray], [0], mask, [256], [0,225])
 
+# plt.figure()
+# plt.title("Gray scale histogram")
+# plt.xlabel("Bins")
+# plt.ylabel('# of pixels')
+# plt.plot(gray_hist)
+# plt.xlim([0,225])
+# plt.show()
 
+# # # # --------> Color Histogram in OpenCV
+
+# plt.figure()
+# plt.title("Color Histogram")
+# plt.xlabel("Bins")
+# plt.ylabel("# of pixels")
+# colors = ('b', 'g', 'r')
+
+# for i, item in enumerate(colors):
+#     color_hist = cv.calcHist([img], [i], None, [256], [0, 225])
+#     plt.plot(color_hist, color=item)
+#     plt.xlim([0, 225])
+
+# plt.show()
+
+# # # # --------> Simple Thresh holding in OpenCV
+
+# threshold, thresh = cv.threshold(gray, 150, 225, cv.THRESH_BINARY)
+# cv.imshow("Thresholded Image", thresh)
+
+# threshold, thresh_inv = cv.threshold(gray, 150, 225, cv.THRESH_BINARY_INV)
+# # cv.imshow("Thresholded Image Inverse", thresh_inv)
+# print({threshold})
+
+# # # # --------> Adaptive Threshholding in OpenCV
+
+# adaptive_threshold = cv.adaptiveThreshold(gray, 150, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 11, 3)
+# cv.imshow("Adaptive threshold image", adaptive_threshold)
+
+# # # # --------> Laplacian
+
+# lap = cv.Laplacian(gray, cv.CV_64F)
+# lap = np.uint8(np.absolute(lap))
+# cv.imshow("Laplacian", lap)
+
+# # # # --------> Sobel 
+
+# sobelX = cv.Sobel(gray, cv.CV_64F, 0, 1)
+# sobelY = cv.Sobel(gray, cv.CV_64F, 1, 0)
+# sobeled = cv.bitwise_or(sobelX, sobelY)
+
+# cv.imshow("Sobeld", sobeled)
 
 cv.waitKey(0)
