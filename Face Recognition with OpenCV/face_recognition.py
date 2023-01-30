@@ -3,7 +3,7 @@ import cv2 as cv
 
 haar_cascade = cv.CascadeClassifier('haar_face.xml')
 
-people = ['Ben Aklif', 'Elton John', 'Haleem Sultan', 'Imran Khan', 'Jerry Seinfield']
+people = ['Ben Aklif', 'Elton John', 'Esra Bilgic', 'Imran Khan', 'Jerry Seinfield']
 
 # features = np.load("features.npy", allow_pickle=True)
 # labels = np.load("labels.npy",  allow_pickle=True)
@@ -12,7 +12,7 @@ face_recognizer = cv.face.LBPHFaceRecognizer_create()
 face_recognizer.read("face_trained.yml")
 
 # Sample image here
-img = cv.imread("D:\\Python\\OpenCV\\Faces\\Validation\\Imran.jpg")
+img = cv.imread(r"D:\Python\OpenCV\Faces\Validation\Esra.jpg")
 
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 cv.imshow("Person", gray)
@@ -30,4 +30,4 @@ for (x,y,w,h) in faces_rect:
     cv.rectangle(img, (x,y), (x+w, y+h), (0,255,0), 3)
 
 cv.imshow("Recognized face", img)
-cv.waitKey(0)
+cv.waitKey(0) 

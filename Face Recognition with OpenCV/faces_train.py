@@ -2,7 +2,7 @@ import os
 import cv2 as cv
 import numpy as np
 
-people = ['Ben Aklif', 'Elton John', 'Haleem Sultan', 'Imran Khan', 'Jerry Seinfield']
+people = ['Ben Aklif', 'Elton John', 'Esra Bilgic', 'Imran Khan', 'Jerry Seinfield']
 DIR = r'D:\Python\OpenCV\Faces'
 
 haar_cascade = cv.CascadeClassifier('haar_face.xml')
